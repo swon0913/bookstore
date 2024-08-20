@@ -6,7 +6,6 @@ public class Main {
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		
 		/*
 		 * ! 프로그램 개발 전 필독 !
 		 * 개발이 어렵긴 하지만 본인이 안하면 결국 손해보는 것은 본인임
@@ -18,19 +17,13 @@ public class Main {
 		 * 그 능력을 기른다는 생각으로 해줬으면 좋겠음
 		 * 최대한 도움을 주겠지만 결국 해내는 것은 본인이라는 것을 잊지 마셈
 		 */
-		
 		while (true) {
 			
 			System.out.println("1. 회원가입");
 			System.out.println("2. 로그인");
 			System.out.println("3. 관리자 로그인");
 			System.out.println("4. 종료");
-			/*
-			 * 1. 회원가입
-			 * 2. 로그인
-			 * 3. 관리자 로그인
-			 * 4. 종료
-			 */
+			
 			int choice = scanner.nextInt();
             scanner.nextLine(); // 개행 문자 제거
 			
@@ -85,12 +78,7 @@ public class Main {
                 		System.out.println("2. 회원 관리");
                 		System.out.println("3. 주문 관리");
                 		System.out.println("4. 로그아웃");
-                		/*
-                		 * 1. 도서 관리
-                		 * 2. 회원 관리
-                		 * 3. 주문 관리
-                		 * 4. 로그아웃
-                		 */
+                		
                         int adminChoice = scanner.nextInt();
                         scanner.nextLine();
 

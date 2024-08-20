@@ -3,6 +3,7 @@ package bookstore_lsw;
 import java.util.*;
 
 public class Account {
+	
 	private int index;
     private String name;
 	private String id;
@@ -43,10 +44,9 @@ public class Account {
 
 		System.out.print("비밀번호를 입력하세요: ");
 		String password = scanner.nextLine();
-
-		List<String> existingAccount = DBUtil.read("account");
-		int nextIndex = existingAccount.size();
-
+		
+		int nextIndex= getNextAccountIndex();
+		
 		Account newAccount = new Account(nextIndex, name, id, password);
 		addAccount(newAccount);
 		/*
@@ -68,12 +68,11 @@ public class Account {
 		
 		Account LoginAccount =authenticate(id,password);
 		
+		return LoginAccount;
 		/*
 		 * 사용자의 ID, PW를 Scanner 로 입력 받음 아래 authenticate() 함수를 호출하여 회원정보가 일치하는지 확인 회원 정보가
 		 * 존재하는 경우, 해당 유저의 데이터를 반환함 없는 경우 null 반환
 		 */
-		Account null_data = null;
-		return null_data;
 	}
 
 	// 로그인 인증
@@ -85,12 +84,11 @@ public class Account {
 				return account;
 			}
 		}
+		return null;
 		/*
 		 * getAllAccounts() 함수를 호출하여 모든 사용자의 데이터를 가져옴 for-each 문으로 가져온 정보와 맞는지 확인함 맞는 경우
 		 * 해당 데이터(for-each 요소)를 반환함 없는 경우 null 반환
 		 */
-		
-		return null;
 	}
 
 	// 관리자용 : 모든 회원 정보 반환
@@ -114,12 +112,13 @@ public class Account {
 
 	// 회원가입용 : 가장 마지막 회원 번호 +1 반환
 	private static int getNextAccountIndex() {
+		List<String> existingAccount = DBUtil.read("account");
+		int nextIndex = existingAccount.size();
 		/*
 		 * DB 에서 가져온 데이터의 size 를 반환하여 인덱스를 넘김 인덱스는 0번부터 시작하기 때문에 size 만 반환하면 자동으로 마지막
 		 * 회원번호 +1 이 됨
 		 */
-		int null_data = 0;
-		return null_data;
+		return nextIndex;
 	}
 
 	// 가입한 회원 정보 추가
@@ -131,15 +130,31 @@ public class Account {
     	 * DBUtil 에 있는 create 함수를 호출하여 DB에 저장함
     	 * 단, 저장 시 Account 클래스가 아닌 String 형으로 형변환을 해야 함
     	 */
-    	
-    }
+    }List<String> catalog= DBUtil.read("book");
 
 	// 사용자 도서 목록 보기 및 선택 후 주문 기능
 	public void browseAndOrder() {
+		Scanner scanner = new Scanner(System.in);
+		List<String> Bookdata = DBUtil.read("book");
+		
+		
+		while (true) {
+			for(String book : Bookdata) {
+				System.out.println(book);
+			}
+			System.out.println("자세히 볼 도서 번호를 입력해주세요");
+			int choice = scanner.nextInt();
+			scanner.nextLine();
+			
+			String selectedBook = Bookdata.get(choice);
+	        System.out.println("선택한 도서: " + selectedBook);
+			
+		}
 		/*
 		 * 도서 목록을 불러와 모든 도서 정보를 나열함 입력을 통해 해당 책의 인덱스 번호를 입력받으면 상세 정보를 출력하고 주문 여부를 물어봄,
 		 * 주문 시 수량과 주소를 입력받아 order 로 보냄 반복해서 구매할 수 있도록 전체 while 문 활용
 		 */
+		
 	}
-
+	
 }
