@@ -11,7 +11,7 @@ class DBUtil {
 	 * 따로 추가하지 않아도 됨
 	 */
 	
-	public static String filePath = "src/bookstore_priview/";
+	public static String filePath = "src/bookstore_lsw/";
 
     // 데이터를 파일에 추가하는 메서드
     public static void create(String tableName, String data) {

@@ -49,6 +49,12 @@ public class Main {
 			}
 			else if (choice == 2) {
 				Account account = Account.login();
+				if(account != null) {
+					System.out.println("로그인 성공");
+					account.browseAndOrder();
+				}else {
+					System.out.println("로그인 실패 ID또는 패스워드가 잘못 되었습니다.");
+				}
 				/*
 				 * 회원 클래스 불러오기 Account account
 				 * Account -> login() 함수 불러오기
@@ -75,6 +81,10 @@ public class Main {
                 	 * 관리자 로그인 성공 시
                 	 */
                 	while (true) {
+                		System.out.println("1. 도서 관리");
+                		System.out.println("2. 회원 관리");
+                		System.out.println("3. 주문 관리");
+                		System.out.println("4. 로그아웃");
                 		/*
                 		 * 1. 도서 관리
                 		 * 2. 회원 관리
@@ -85,14 +95,17 @@ public class Main {
                         scanner.nextLine();
 
                         if (adminChoice == 1) {
+                        	Admin.manageBooks();
                         	/*
                         	 * Admin -> manageBooks() 호출
                         	 */
                         } else if (adminChoice == 2) {
+                        	Admin.manageAccounts();
                         	/*
                         	 * Admin -> manageAccounts() 호출
                         	 */
                         } else if (adminChoice == 3) {
+                        	Admin.manageOrders();
                         	/*
                         	 * Admin -> manageOrders() 호출
                         	 */
