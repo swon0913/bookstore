@@ -130,24 +130,32 @@ public class Account {
     	 * DBUtil 에 있는 create 함수를 호출하여 DB에 저장함
     	 * 단, 저장 시 Account 클래스가 아닌 String 형으로 형변환을 해야 함
     	 */
-    }List<String> catalog= DBUtil.read("book");
+    } 
 
 	// 사용자 도서 목록 보기 및 선택 후 주문 기능
 	public void browseAndOrder() {
 		Scanner scanner = new Scanner(System.in);
 		List<String> Bookdata = DBUtil.read("book");
 		
-		
 		while (true) {
 			for(String book : Bookdata) {
 				System.out.println(book);
 			}
-			System.out.println("자세히 볼 도서 번호를 입력해주세요");
-			int choice = scanner.nextInt();
+			System.out.println("도서 상세 보기 또는 주문하려면 도서 인덱스를 입력하세요. (종료하려면 -1 입력)");
+			int number = scanner.nextInt();
 			scanner.nextLine();
 			
-			String selectedBook = Bookdata.get(choice);
-	        System.out.println("선택한 도서: " + selectedBook);
+			if (index == -1) {
+	            break;
+	        }
+			if (index < 0 || index >= Bookdata.size()) {
+	            System.out.println("유효하지 않은 번호입니다. 다시 입력해주세요.");
+	            continue;
+	        }
+			
+			String book = Bookdata.get(number);
+			System.out.println("선택한 도서:"+ book );
+			
 			
 		}
 		/*

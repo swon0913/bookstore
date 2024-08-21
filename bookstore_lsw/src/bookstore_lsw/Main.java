@@ -18,7 +18,6 @@ public class Main {
 		 * 최대한 도움을 주겠지만 결국 해내는 것은 본인이라는 것을 잊지 마셈
 		 */
 		while (true) {
-			
 			System.out.println("1. 회원가입");
 			System.out.println("2. 로그인");
 			System.out.println("3. 관리자 로그인");
