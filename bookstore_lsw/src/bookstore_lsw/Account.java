@@ -138,6 +138,7 @@ public class Account {
 		List<String> Bookdata = DBUtil.read("book");
 		
 		while (true) {
+			System.out.println("\n=== 도서 목록 ===");
 			for(String book : Bookdata) {
 				System.out.println(book);
 			}

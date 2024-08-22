@@ -1,5 +1,6 @@
 package bookstore_lsw;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Book {
@@ -27,13 +28,32 @@ public class Book {
     public String getPreview() { return preview; }
     
     public static List<Book> getBooks() {
-    	List<Book> null_data = null;
-    	return null_data;
+    	List<String> bookData = DBUtil.read("book");
+    	List<Book> books = new ArrayList<>();
+    	
+    	for(String data: bookData) {
+    		String[] fields = data.split(",");
+    		Book book = new Book(
+    			Integer.parseInt(fields[0]),
+    			fields[1],
+    			fields[2],
+    			fields[3],
+    			Integer.parseInt(fields[4]),
+    			fields[5]
+    		);
+    		books.add(book);
+    	}
+    	return books;
     }
     
     public static Book getBookDetails(int bookIndex) {
-    	List<String> booksdata=DBUtil.read("book");
-    	
+    	List<String> booksData=DBUtil.read("book");
+    	for(String bookData : booksData) {
+    		String[] data = bookData.split(",");
+    		if(Integer.parseInt(data[0])== bookIndex) {
+    			
+    		}
+    	}
     	/*
     	 * DB에 저장된 모든 책의 정보를 가져온 뒤,
     	 * DB 데이터의 인덱스와 전달받은 인덱스가 같은지 확인 후
