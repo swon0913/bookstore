@@ -1,5 +1,6 @@
 package bookstore_lsw;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Review {
@@ -27,12 +28,28 @@ public class Review {
     public String getComment() { return comment; }
     
     public static List<Review> getReviewsByBook(int bookIndex) {
+    	List<String> reviewData = DBUtil.read("review");
+    	List<Review> reviews = new ArrayList();
+    	for(String data : reviewData) {
+    		String[] fields = data.split(",");
+    		Review review = new Review(
+    		Integer.parseInt(fields[0]),
+    		Integer.parseInt(fields[1]),
+    		Integer.parseInt(fields[2]),
+    		Integer.parseInt(fields[3]),
+    		fields[4],
+    		fields[5]
+    		);
+    		if(review.getBookIndex() == bookIndex) {
+    			reviews.add(review);
+    		}
+    	}
+    	return reviews;
     	/*
     	 * 모든 리뷰를 불러와서 List 로 변환 후
     	 * 가져온 bookIndex 와 동일한 내용의 리뷰만 반환함
     	 */
-    	List<Review> null_data = null;
-    	return null_data;
+    	
     }
     
     public static void addReview(int bookIndex, int accountIndex, int starPoint, String nick, String comment) {

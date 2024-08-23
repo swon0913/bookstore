@@ -6,22 +6,14 @@ public class Main {
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
-		/*
-		 * ! 프로그램 개발 전 필독 !
-		 * 개발이 어렵긴 하지만 본인이 안하면 결국 손해보는 것은 본인임
-		 * 결국 하다보면 기능을 구현할 수 있음
-		 * 어렵거나 모르겠는 부분은 계속 고민해보거나
-		 * 어렵다고 생각하는 부분은 하나씩 나눠서 해보는 것을 추천함
-		 * 아마 어렵다고 느끼는 가장 큰 원인이
-		 * 데이터가 전달되는 방식에 대한 이해가 부족할 가능성이 큼
-		 * 그 능력을 기른다는 생각으로 해줬으면 좋겠음
-		 * 최대한 도움을 주겠지만 결국 해내는 것은 본인이라는 것을 잊지 마셈
-		 */
+		
 		while (true) {
+			System.out.println("=== 온라인 서점 시스템 ===");
 			System.out.println("1. 회원가입");
 			System.out.println("2. 로그인");
 			System.out.println("3. 관리자 로그인");
 			System.out.println("4. 종료");
+			System.out.print("선택: ");
 			
 			int choice = scanner.nextInt();
             scanner.nextLine(); // 개행 문자 제거
@@ -29,32 +21,19 @@ public class Main {
 			if (choice == 1) {
 				Account newAccount = Account.signUp();
 				if(newAccount != null) {
-					System.out.println("회원가입이 완료되었습니다.");
+					System.out.println("회원가입이 완료되었습니다. 로그인 해주세요.");
 				}else {
 					System.out.println("회원가입에 실패했습니다.");
 				}
-				/*
-				 * 회원 클래스 불러오기 Account newAccount
-				 * Account -> signUp() 함수 불러오기
-				 * if (회원가입 시) { 로그인 이동 알림 }
-				 */
 			}
 			else if (choice == 2) {
 				Account account = Account.login();
 				if(account != null) {
-					System.out.println("로그인 성공");
+					System.out.println("로그인 성공! " + account.getName()+ "님 환영합니다!");
 					account.browseAndOrder();
 				}else {
 					System.out.println("로그인 실패 ID또는 패스워드가 잘못 되었습니다.");
 				}
-				/*
-				 * 회원 클래스 불러오기 Account account
-				 * Account -> login() 함수 불러오기
-				 * if (로그인 시) {
-				 * 	로그인 성공 알림
-				 *	account -> browseAndOrder() 함수 호출
-				 * } else { 로그인 실패 알림 }
-				 */
 			}
 			else if (choice == 3) {
 				/*
@@ -69,10 +48,10 @@ public class Main {
                 String admin_pw = "admin";
                 
                 if (adminId.equals(admin_id) && adminPassword.equals(admin_pw)) {
-                	/*
-                	 * 관리자 로그인 성공 시
-                	 */
+                	System.out.println("관리자 로그인 성공!");
+                	
                 	while (true) {
+                		System.out.println("\n=== 관리자 페이지===");
                 		System.out.println("1. 도서 관리");
                 		System.out.println("2. 회원 관리");
                 		System.out.println("3. 주문 관리");
@@ -120,3 +99,14 @@ public class Main {
 	}
 
 }
+/*
+ * ! 프로그램 개발 전 필독 !
+ * 개발이 어렵긴 하지만 본인이 안하면 결국 손해보는 것은 본인임
+ * 결국 하다보면 기능을 구현할 수 있음
+ * 어렵거나 모르겠는 부분은 계속 고민해보거나
+ * 어렵다고 생각하는 부분은 하나씩 나눠서 해보는 것을 추천함
+ * 아마 어렵다고 느끼는 가장 큰 원인이
+ * 데이터가 전달되는 방식에 대한 이해가 부족할 가능성이 큼
+ * 그 능력을 기른다는 생각으로 해줬으면 좋겠음
+ * 최대한 도움을 주겠지만 결국 해내는 것은 본인이라는 것을 잊지 마셈
+ */

@@ -135,28 +135,56 @@ public class Account {
 	// 사용자 도서 목록 보기 및 선택 후 주문 기능
 	public void browseAndOrder() {
 		Scanner scanner = new Scanner(System.in);
-		List<String> Bookdata = DBUtil.read("book");
-		
 		while (true) {
+			List<Book> bookdata = Book.getBooks();
 			System.out.println("\n=== 도서 목록 ===");
-			for(String book : Bookdata) {
-				System.out.println(book);
+			for(Book book : bookdata) {
+				System.out.println(book.getIndex() +": " + book.getTitle() + "by" + book.getAuthor()+" - "+ book.getPrice()+"원");
 			}
 			System.out.println("도서 상세 보기 또는 주문하려면 도서 인덱스를 입력하세요. (종료하려면 -1 입력)");
-			int number = scanner.nextInt();
+			int bookIndex = scanner.nextInt();
 			scanner.nextLine();
 			
-			if (index == -1) {
-	            break;
-	        }
-			if (index < 0 || index >= Bookdata.size()) {
-	            System.out.println("유효하지 않은 번호입니다. 다시 입력해주세요.");
-	            continue;
-	        }
+			if(bookIndex == -1) {
+				break; // 종료
+			} else if(bookIndex >=0 && bookIndex < bookdata.size()) {
+				Book selectedBook = bookdata.get(bookIndex);
+				System.out.println("\n=== 도서 정보 ===");
+				System.out.println("제목: " + selectedBook.getTitle());
+				System.out.println("저자: " + selectedBook.getAuthor());
+				System.out.println("출판사: " + selectedBook.getCompany());
+				System.out.println("가격: " + selectedBook.getPrice() +"원");
+				System.out.println("소개: " + selectedBook.getPreview());
 			
-			String book = Bookdata.get(number);
-			System.out.println("선택한 도서:"+ book );
-			
+				System.out.println("\n=== 리뷰 ===");
+				List<Review> reviews = Review.getReviewsByBook(bookIndex);
+				for(Review review : reviews) {
+					System.out.println("작성자: " + review.getNick() +"\n별점: " + review.getStarPoint());
+					System.out.println("내용: "+ review.getComment());
+				}
+				
+				System.out.println("\n이 도서를 주문하시겠습니까? (y/n)");
+				String orderChoice = scanner.nextLine();
+				if(orderChoice.equals("y")) {
+					System.out.print("수량: ");
+					int amount = scanner.nextInt();
+					scanner.nextLine();
+					System.out.print("배송지: ");
+					String address = scanner.nextLine();
+					int totalPrice = selectedBook.getPrice() * amount;
+					
+					//주문 저장
+					Order newOrder = new Order(Order.getNextOrderIndex(), selectedBook.getIndex(), this.index, amount,
+							totalPrice, address);
+					Order.addOrder(newOrder);
+					System.out.println("주문이 완료되었습니다.");
+				}else {
+					System.out.println("잘못된 인덱스입니다.");
+				}
+				
+				
+				
+			}
 			
 		}
 		/*
