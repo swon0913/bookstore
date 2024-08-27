@@ -64,7 +64,10 @@ public class Book {
     }
     
     public static void addBook(String title, String author, String company, int price, String preview) {
-    	
+    	List<String> books = DBUtil.read("book");
+    	int index = books.size();
+		String newBookData = index + "," + title + "," + author + "," + company + "," + price + "," + preview;
+		DBUtil.create("book", newBookData);
     	/*
     	 * DB에서 Book 의 정보를 가져온 후 size() 함수를 호출하여 다음 인덱스 지정
     	 * 받은 데이터와 String 형으로 조합한 후 create
@@ -72,12 +75,15 @@ public class Book {
     }
     
     public static void updateBook(int index, String title, String author, String company, int price, String preview) {
+    	String updatedBookData = index + "," + title + "," + author + "," + company + "," + price + "," + preview;
+		DBUtil.update("book", index, updatedBookData);
     	/*
     	 * Account 의 update 와 동일한 형식
     	 */
     }
     
     public static void deleteBook(int index) {
+    	DBUtil.delete("book", index);
     	/*
     	 * Account 의 delete 와 동일한 형식
     	 */

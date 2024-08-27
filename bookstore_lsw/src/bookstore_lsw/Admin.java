@@ -1,10 +1,76 @@
 package bookstore_lsw;
 
-import java.util.*;
+import java.util.List;
+import java.util.Scanner;
 
 public class Admin {
 	// 도서 관리: 도서 조회, 추가, 수정, 삭제
     public static void manageBooks() {
+    	Scanner scanner = new Scanner(System.in);
+    	while(true) {
+    		System.out.println("\n=== 도서 관리 페이지 ===");
+    		System.out.println("1. 도서 목록 보기");
+    		System.out.println("2. 도서 추가");
+    		System.out.println("3. 도서 수정");
+    		System.out.println("4. 도서 삭제");
+    		System.out.println("5. 돌아가기");
+    		System.out.print("선택: ");
+    		int choice = scanner.nextInt();
+    		scanner.nextLine();
+		
+			if (choice == 1) {
+				List<Book> books = Book.getBooks();
+				for (Book book : books) {
+					System.out.println(book.getIndex() + ":" + book.getTitle());
+				}
+			} else if (choice == 2) { // 제목 저자 출판사 가격 소개
+				System.out.println("제목: ");
+				String title = scanner.nextLine();
+				System.out.println("저자: ");
+				String author = scanner.nextLine();
+				System.out.println("출판사: ");
+				String company = scanner.nextLine();
+				System.out.println("가격: ");
+				int price = scanner.nextInt();
+				scanner.nextLine();
+				System.out.println("소개: ");
+				String preview = scanner.nextLine();
+
+				Book.addBook(title, author, company, price, preview);
+				System.out.println("도서가 추가되었습니다.");
+
+			} else if (choice == 3) {
+				System.out.println("수정할 도서의 인덱스: ");
+				int index = scanner.nextInt();
+				scanner.nextLine();
+				System.out.println("제목: ");
+				String title = scanner.nextLine();
+				System.out.println("저자: ");
+				String author = scanner.nextLine();
+				System.out.println("출판사: ");
+				String company = scanner.nextLine();
+				System.out.println("가격: ");
+				int price = scanner.nextInt();
+				scanner.nextLine();
+				System.out.println("소개: ");
+				String preview = scanner.nextLine();
+
+				Book.updateBook(index, title, author, company, price, preview);
+				System.out.println("도서가 수정되었습니다.");
+
+			} else if (choice == 4) {
+				System.out.println("삭제할 도서의 인덱스: ");
+				int index = scanner.nextInt();
+				scanner.nextLine();
+				Book.deleteBook(index);
+				System.out.println("도서가 삭제되었습니다.");
+
+			} else if (choice == 5) {
+				break; // 돌아가기
+			} else {
+				System.out.println("잘못된 선택입니다");
+			}
+    
     	/*
     	 * 1. 도서 목록 보기
     	 * 2. 도서 추가
@@ -14,10 +80,20 @@ public class Admin {
     	 * 입력 받으면서 각 기능을 수행할 수 있도록 구현
     	 * switch 문 보다는 if-else 문이 구현이 더 용이함
     	 */
+    	}
+    	
     }
     
     // 회원 관리: 회원 조회, 수정, 삭제
     public static void manageAccounts() {
+    	while(true) {
+        	System.out.println("\n=== 회원 관리 페이지 ===");
+    		System.out.println("1. 회원 목록 보기");
+    		System.out.println("2. 회원 정보 수정");
+    		System.out.println("3. 회원 삭제");
+    		System.out.println("4. 돌아가기");
+    		System.out.print("선택: ");
+        	}
     	/*
     	 * 1. 회원 목록 보기
     	 * 2. 회원 정보 수정
@@ -31,6 +107,14 @@ public class Admin {
     
     // 주문 관리: 주문 조회, 수정, 삭제
     public static void manageOrders() {
+    	while(true) {
+        	System.out.println("\n=== 주문 관리 페이지 ===");
+    		System.out.println("1. 주문 목록 보기");
+    		System.out.println("2. 주문 정보 수정");
+    		System.out.println("3. 주문 삭제");
+    		System.out.println("4. 돌아가기");
+    		System.out.print("선택: ");
+        	}
     	/*
     	 * 1. 주문 목록 보기
     	 * 2. 주문 정보 수정

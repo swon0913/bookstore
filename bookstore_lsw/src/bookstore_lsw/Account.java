@@ -67,7 +67,6 @@ public class Account {
 		String password = scanner.nextLine();
 		
 		Account LoginAccount =authenticate(id,password);
-		
 		return LoginAccount;
 		/*
 		 * 사용자의 ID, PW를 Scanner 로 입력 받음 아래 authenticate() 함수를 호출하여 회원정보가 일치하는지 확인 회원 정보가
@@ -102,14 +101,13 @@ public class Account {
 			String name = fields[1];
 			String id = fields[2];
 			String password = fields[3];
-			accounts.add(new Account(index, name,id,password)); //내일 한번체크
+			accounts.add(new Account(index, name,id,password));
 		}
 		/*
 		 * 모든 회원 정보를 리스트에 담아서 반환
 		 */
 		return accounts;
 	}
-
 	// 회원가입용 : 가장 마지막 회원 번호 +1 반환
 	private static int getNextAccountIndex() {
 		List<String> existingAccount = DBUtil.read("account");
@@ -131,7 +129,6 @@ public class Account {
     	 * 단, 저장 시 Account 클래스가 아닌 String 형으로 형변환을 해야 함
     	 */
     } 
-
 	// 사용자 도서 목록 보기 및 선택 후 주문 기능
 	public void browseAndOrder() {
 		Scanner scanner = new Scanner(System.in);
@@ -181,9 +178,6 @@ public class Account {
 				}else {
 					System.out.println("잘못된 인덱스입니다.");
 				}
-				
-				
-				
 			}
 			
 		}
@@ -191,7 +185,6 @@ public class Account {
 		 * 도서 목록을 불러와 모든 도서 정보를 나열함 입력을 통해 해당 책의 인덱스 번호를 입력받으면 상세 정보를 출력하고 주문 여부를 물어봄,
 		 * 주문 시 수량과 주소를 입력받아 order 로 보냄 반복해서 구매할 수 있도록 전체 while 문 활용
 		 */
-		
 	}
 	
 }
