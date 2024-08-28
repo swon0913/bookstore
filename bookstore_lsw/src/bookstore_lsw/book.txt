@@ -7,4 +7,3 @@
 6,Java Performance,Scott Oaks,O'Reilly,55000,Java 애플리케이션 성능 튜닝을 위한 가이드
 7,Java Puzzlers,Joshua Bloch,O'Reilly,45000,Java 프로그래밍의 함정을 다룬 퍼즐 책
 8,Java Network Programming,Elliotte Rusty Harold,O'Reilly,50000,Java로 네트워크 프로그래밍을 시작하는 방법
-9,Java Design Patterns,James W. Cooper,Addison-Wesley,52000,디자인 패턴을 Java로 구현하는 방법

@@ -1,6 +1,7 @@
 package bookstore_lsw;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Order {
 	private int index;
@@ -27,6 +28,7 @@ public class Order {
     public String getAddress() { return address; }
     
     public static int getNextOrderIndex() {
+    	
     	/*
     	 * getNextAccountIndex의 내용과 동일함
     	 * 자료형의 주의하기, getAllOrders 로 가져오면 됨
@@ -43,12 +45,26 @@ public class Order {
     }
     
     public static List<Order> getAllOrders() {
+    	List<String> orderAllData = DBUtil.read("account");
+    	List<Order> orders = new ArrayList<>();
+    	
+    	for(String data : orderAllData) {
+    		String[] fields = data.split(",");
+    		Order order = new Order(
+    				Integer.parseInt(fields[0]),
+    				Integer.parseInt(fields[1]),
+    				Integer.parseInt(fields[2]),
+    				Integer.parseInt(fields[3]),
+    				Integer.parseInt(fields[4]),
+    				fields[5]
+    			);
+    	}
     	/*
     	 * DB에서 모든 데이터를 가져오기
     	 * 중복 설명 생략
     	 */
-    	List<Order> null_data = null;
-    	return null_data;
+    	
+    	return orders;
     }
     
     public static List<Order> getOrders(int accountIndex) {

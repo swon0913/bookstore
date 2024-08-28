@@ -39,7 +39,7 @@ public class Main {
 				/*
 				 * 관리자 로그인
 				 */
-				System.out.print("관리자 ID: ");
+				System.out.print("\n관리자 ID: ");
                 String adminId = scanner.nextLine();
                 System.out.print("비밀번호: ");
                 String adminPassword = scanner.nextLine();
