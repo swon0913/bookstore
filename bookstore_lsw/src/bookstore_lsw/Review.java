@@ -53,6 +53,7 @@ public class Review {
     }
     
     public static void addReview(int bookIndex, int accountIndex, int starPoint, String nick, String comment) {
+    	
     	/*
     	 * 리뷰 정보를 가져와서 추가하는 기능
     	 * Main 에서 리뷰 작성 기능을 추가하지 않았기 때문에
