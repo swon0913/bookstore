@@ -49,11 +49,13 @@ public class Review {
     	 * 모든 리뷰를 불러와서 List 로 변환 후
     	 * 가져온 bookIndex 와 동일한 내용의 리뷰만 반환함
     	 */
-    	
     }
     
     public static void addReview(int bookIndex, int accountIndex, int starPoint, String nick, String comment) {
-    	
+    	List<String> reviews = DBUtil.read("review");
+    	int index = reviews.size();
+    	String newReviewData = index + "," + bookIndex + "," + accountIndex + "," + starPoint + "," + nick + "," + comment;
+    	DBUtil.create("review", newReviewData);
     	/*
     	 * 리뷰 정보를 가져와서 추가하는 기능
     	 * Main 에서 리뷰 작성 기능을 추가하지 않았기 때문에
@@ -63,9 +65,6 @@ public class Review {
     }
     
     public static void deleteReview(int index) {
-    	/*
-    	 * 관리자가 리뷰를 삭제하는 기능
-    	 * 중복 설명 생략
-    	 */
+    	DBUtil.delete("review", index);
     }
 }
