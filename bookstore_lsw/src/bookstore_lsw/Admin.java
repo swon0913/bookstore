@@ -1,5 +1,6 @@
 package bookstore_lsw;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -166,6 +167,40 @@ public class Admin {
     			for(Order order : orders) {
     				System.out.println(order.getIndex()+" "+order.getAddress());
     			}
+    		} else if(choice==2) {
+    			System.out.println("수정할 주문의 인덱스: ");
+    			int index = scanner.nextInt();
+    			scanner.nextLine();
+    			System.out.println("새 배송지: ");
+    			String newAddress = scanner.nextLine();
+    			
+    			List<String> ordersData = DBUtil.read("order");
+    			List<Order> orders = new ArrayList<>();
+    			
+    			for(String data : ordersData) {
+    				String[] fields = data.split(",");
+    				Order order = new Order(
+    					Integer.parseInt(fields[0]),
+    					Integer.parseInt(fields[1]),
+    					Integer.parseInt(fields[2]),
+    					Integer.parseInt(fields[3]),
+    					Integer.parseInt(fields[4]),
+    					fields[5]
+    				);
+    				orders.add(order);
+    			}
+    			
+    		}else if(choice==3) {
+    			System.out.println("삭제할 인덱스:");
+    			int index = scanner.nextInt();
+    			scanner.nextLine();
+    			DBUtil.delete("order", index);
+    			System.out.println("주문이 삭제되었습니다.");
+    			
+    		}else if(choice==4) {
+    			break;
+    		}else {
+    			System.out.println("잘못된 인덱스입니다.");
     		}
         }
     	/*
