@@ -51,16 +51,15 @@ public class Book {
     	for(String bookData : booksData) {
     		String[] data = bookData.split(",");
     		if(Integer.parseInt(data[0])== bookIndex) {
-    			
+    			return new Book(Integer.parseInt(data[0]), data[1], data[2],data[3],Integer.parseInt(data[4]),data[5]);
     		}
     	}
+    	return null;
     	/*
     	 * DB에 저장된 모든 책의 정보를 가져온 뒤,
     	 * DB 데이터의 인덱스와 전달받은 인덱스가 같은지 확인 후
     	 * 동일한 인덱스가 있으면 그 데이터를 DB에서 가져와 반환
     	 */
-    	Book null_data = null;
-    	return null_data;
     }
     
     public static void addBook(String title, String author, String company, int price, String preview) {

@@ -56,7 +56,7 @@ public class Order {
     				Integer.parseInt(fields[1]),
     				Integer.parseInt(fields[2]),
     				Integer.parseInt(fields[3]),
-    				Integer.parseInt(fields[4]),
+    				Integer.parseInt(fields[4]), //<------------
     				fields[5]
     			);
     		orders.add(order);

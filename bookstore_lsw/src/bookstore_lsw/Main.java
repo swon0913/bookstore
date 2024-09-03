@@ -71,7 +71,7 @@ public class Main {
                         	 * Admin -> manageAccounts() 호출
                         	 */
                         } else if (adminChoice == 3) {
-                        	Admin.manageOrders();
+                        	Admin.manageOrders(); // <-----------
                         	/*
                         	 * Admin -> manageOrders() 호출
                         	 */

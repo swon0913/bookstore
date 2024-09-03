@@ -41,7 +41,7 @@ public class Admin {
 				System.out.println("도서가 추가되었습니다.");
 
 			} else if (choice == 3) {
-				System.out.println("수정할 도서의 인덱스: ");
+				System.out.println("수정할 도서의 번호: ");
 				int index = scanner.nextInt();
 				scanner.nextLine();
 				System.out.println("제목: ");
@@ -60,7 +60,7 @@ public class Admin {
 				System.out.println("도서가 수정되었습니다.");
 
 			} else if (choice == 4) {
-				System.out.println("삭제할 도서의 인덱스: ");
+				System.out.println("삭제할 도서의 번호: ");
 				int index = scanner.nextInt();
 				scanner.nextLine();
 				Book.deleteBook(index);
@@ -105,7 +105,7 @@ public class Admin {
     			}
     			
     		}else if(choice==2) {
-    			System.out.println("수정할 회원의 인덱스: ");
+    			System.out.println("수정할 회원의 번호: ");
     			int index = scanner.nextInt();
     			scanner.nextLine();
     			
@@ -126,7 +126,7 @@ public class Admin {
     			
     			System.out.println("회원 정보가 수정되었습니다.");
     		}else if(choice==3) {
-    			System.out.println("삭제할 회원의 인덱스: ");
+    			System.out.println("삭제할 회원의 번호: ");
     			int index = scanner.nextInt();
     			scanner.nextLine();
     			
@@ -162,13 +162,27 @@ public class Admin {
     		scanner.nextLine();
     		
     		if(choice==1) {
-    			List<Order> orders = Order.getAllOrders();
+    			List<String> ordersData = DBUtil.read("order");
+    			List<Order> orders = new ArrayList<>();
     			
-    			for(Order order : orders) {
-    				System.out.println(order.getIndex()+" "+order.getAddress());
+    			for (String data : ordersData) {
+    				String[] fields = data.split(",");
+    				Order order = new Order(
+    					Integer.parseInt(fields[0]),
+    					Integer.parseInt(fields[1]),
+    					Integer.parseInt(fields[2]),
+    					Integer.parseInt(fields[3]),
+    					Integer.parseInt(fields[4]),
+    					fields[5]
+    				);
+    				orders.add(order);
     			}
+    			for(Order order : orders) {
+    				System.out.println(order.getIndex() + ": 책 번호 "+ order.getBookIndex() + ", 총 가격: "+order.getTotalPrice()+", 배송지: "+order.getAddress());
+    			}
+    			
     		} else if(choice==2) {
-    			System.out.println("수정할 주문의 인덱스: ");
+    			System.out.println("수정할 주문의 번호: ");
     			int index = scanner.nextInt();
     			scanner.nextLine();
     			System.out.println("새 배송지: ");
@@ -189,9 +203,9 @@ public class Admin {
     				);
     				orders.add(order);
     			}
-    			
+    		
     		}else if(choice==3) {
-    			System.out.println("삭제할 인덱스:");
+    			System.out.println("삭제할 번호:");
     			int index = scanner.nextInt();
     			scanner.nextLine();
     			DBUtil.delete("order", index);
@@ -200,7 +214,7 @@ public class Admin {
     		}else if(choice==4) {
     			break;
     		}else {
-    			System.out.println("잘못된 인덱스입니다.");
+    			System.out.println("잘못된 번호입니다.");
     		}
         }
     	/*
