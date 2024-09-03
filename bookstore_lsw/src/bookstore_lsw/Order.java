@@ -30,10 +30,8 @@ public class Order {
     public static int getNextOrderIndex() {
     	List<Order> orders = getAllOrders();
      	return orders.size();
-    	/*
-    	 * getNextAccountIndex의 내용과 동일함
-    	 * 자료형의 주의하기, getAllOrders 로 가져오면 됨
-    	 */
+    	 //* getNextAccountIndex의 내용과 동일함
+    	 //* 자료형의 주의하기, getAllOrders 로 가져오면 됨
     }
     
     public static void addOrder(Order order) {
@@ -46,7 +44,7 @@ public class Order {
     }
     
     public static List<Order> getAllOrders() {
-    	List<String> orderAllData = DBUtil.read("account");
+    	List<String> orderAllData = DBUtil.read("order2");
     	List<Order> orders = new ArrayList<>();
     	
     	for(String data : orderAllData) {
