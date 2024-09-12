@@ -71,7 +71,7 @@ public class Account {
 		/*
 		 * 사용자의 ID, PW를 Scanner 로 입력 받음 아래 authenticate() 함수를 호출하여 회원정보가 일치하는지 확인 회원 정보가
 		 * 존재하는 경우, 해당 유저의 데이터를 반환함 없는 경우 null 반환
-		 */
+		 */  
 	}
 
 	// 로그인 인증
@@ -130,7 +130,7 @@ public class Account {
     	 * 단, 저장 시 Account 클래스가 아닌 String 형으로 형변환을 해야 함
     	 */
     } 
-	// 사용자 도서 목록 보기 및 선택 후 주문 기능
+	// 사용자 도서 목록 보기 및 선택 후 주문 기능123
 	public void browseAndOrder() {
 		Scanner scanner = new Scanner(System.in);
 		while (true) {
