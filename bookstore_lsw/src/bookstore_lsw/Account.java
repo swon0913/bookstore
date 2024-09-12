@@ -130,7 +130,7 @@ public class Account {
     	 * 단, 저장 시 Account 클래스가 아닌 String 형으로 형변환을 해야 함
     	 */
     } 
-	// 사용자 도서 목록 보기 및 선택 후 주문 기능123
+	// 사용자 도서 목록 보기 및 선택 후 주문 기능
 	public void browseAndOrder() {
 		Scanner scanner = new Scanner(System.in);
 		while (true) {
