@@ -1,6 +1,7 @@
 package bookstore_lsw;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Order {
 	private int index;
@@ -27,15 +28,15 @@ public class Order {
     public String getAddress() { return address; }
     
     public static int getNextOrderIndex() {
-    	/*
-    	 * getNextAccountIndex의 내용과 동일함
-    	 * 자료형의 주의하기, getAllOrders 로 가져오면 됨
-    	 */
-    	int null_data = 0;
-    	return null_data;
+    	List<Order> orders = getAllOrders();
+     	return orders.size();
+    	 //* getNextAccountIndex의 내용과 동일함
+    	 //* 자료형의 주의하기, getAllOrders 로 가져오면 됨
     }
     
     public static void addOrder(Order order) {
+    	String orderData = order.getIndex() + "," + order.getBookIndex() + "," + order.getAccountIndex() + "," + order.getAmount() + "," + order.getTotalPrice() + "," + order.getAddress();
+    	DBUtil.create("order", orderData);
     	/*
     	 * addBook 과 같은 원리
     	 * 중복 설명 생략
@@ -43,22 +44,47 @@ public class Order {
     }
     
     public static List<Order> getAllOrders() {
+    	List<String> orderAllData = DBUtil.read("order2");
+    	List<Order> orders = new ArrayList<>();
+    	
+    	for(String data : orderAllData) {
+    		String[] fields = data.split(",");
+    		Order order = new Order(
+    				Integer.parseInt(fields[0]),
+    				Integer.parseInt(fields[1]),
+    				Integer.parseInt(fields[2]),
+    				Integer.parseInt(fields[3]),
+    				Integer.parseInt(fields[4]), //<------------
+    				fields[5]
+    			);
+    		orders.add(order);
+    	}
     	/*
     	 * DB에서 모든 데이터를 가져오기
     	 * 중복 설명 생략
     	 */
-    	List<Order> null_data = null;
-    	return null_data;
+    	return orders;
     }
     
     public static List<Order> getOrders(int accountIndex) {
+    	List<String> ordersData= DBUtil.read("order");
+    	List<Order> orders = new ArrayList<>();
+    	
+    	for(String orderData : ordersData) {
+    		String[] data = orderData.split(",");
+    		if(Integer.parseInt(data[2]) == accountIndex) {
+    			orders.add(new Order (Integer.parseInt(data[0]), Integer.parseInt(data[1]),
+    					Integer.parseInt(data[2]),Integer.parseInt(data[3]),
+    					Integer.parseInt(data[4]),data[5]));
+    		}
+    	}
+    	
+    	return orders;
     	/*
     	 * getAccounts 와 같은 원리
     	 * 구현해도 쓰는 곳이 없어서 구현하지 않아도 됨
     	 * 형식상 존재하는 함수
     	 */
-    	List<Order> orders = null;
-    	return orders;
     }
     
 }

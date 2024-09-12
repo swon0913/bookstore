@@ -139,7 +139,7 @@ public class Account {
 			for(Book book : bookdata) {
 				System.out.println(book.getIndex() +": " + book.getTitle() + "by" + book.getAuthor()+" - "+ book.getPrice()+"원");
 			}
-			System.out.println("도서 상세 보기 또는 주문하려면 도서 인덱스를 입력하세요. (종료하려면 -1 입력)");
+			System.out.println("도서 상세 보기 또는 주문하려면 도서 번호를 입력하세요. (종료하려면 -1 입력)");
 			int bookIndex = scanner.nextInt();
 			scanner.nextLine();
 			
@@ -177,7 +177,7 @@ public class Account {
 					Order.addOrder(newOrder);
 					System.out.println("주문이 완료되었습니다.");
 				}else {
-					System.out.println("잘못된 인덱스입니다.");
+					System.out.println("잘못된 번호입니다.");
 				}
 			}
 			
