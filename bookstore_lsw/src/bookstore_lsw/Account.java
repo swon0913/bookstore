@@ -71,7 +71,7 @@ public class Account {
 		/*
 		 * 사용자의 ID, PW를 Scanner 로 입력 받음 아래 authenticate() 함수를 호출하여 회원정보가 일치하는지 확인 회원 정보가
 		 * 존재하는 경우, 해당 유저의 데이터를 반환함 없는 경우 null 반환
-		 */
+		 */  
 	}
 
 	// 로그인 인증
@@ -112,11 +112,12 @@ public class Account {
 	private static int getNextAccountIndex() {
 		List<String> existingAccount = DBUtil.read("account");
 		int nextIndex = existingAccount.size();
+		
+		return nextIndex;
 		/*
 		 * DB 에서 가져온 데이터의 size 를 반환하여 인덱스를 넘김 인덱스는 0번부터 시작하기 때문에 size 만 반환하면 자동으로 마지막
 		 * 회원번호 +1 이 됨
 		 */
-		return nextIndex;
 	}
 
 	// 가입한 회원 정보 추가

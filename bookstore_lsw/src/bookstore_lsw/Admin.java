@@ -210,7 +210,7 @@ public class Admin {
     				DBUtil.update("order", index, index + "," + order.getBookIndex()+","+ order.getAccountIndex()+","+order.getAmount()+","+order.getTotalPrice()+","+ newAddress);
     				System.out.println("주문 정보가 수정되었습니다.");
     			} else {
-    				System.out.println("잘못된 인덱스입니다.");
+    				System.out.println("잘못된 번호입니다.");
     			}
     		
     		}else if(choice==3) {
