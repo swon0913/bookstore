@@ -130,61 +130,109 @@ public class Account {
     	 */
     } 
 	// 사용자 도서 목록 보기 및 선택 후 주문 기능
+
 	public void browseAndOrder() {
-		Scanner scanner = new Scanner(System.in);
-		while (true) {
-			List<Book> bookdata = Book.getBooks();
-			System.out.println("\n=== 도서 목록 ===");
-			for(Book book : bookdata) {
-				System.out.println(book.getIndex() +": " + book.getTitle() + "by" + book.getAuthor()+" - "+ book.getPrice()+"원");
-			}
-			System.out.println("도서 상세 보기 또는 주문하려면 도서 번호를 입력하세요. (종료하려면 -1 입력)");
-			int bookIndex = scanner.nextInt();
-			scanner.nextLine();
-			
-			if(bookIndex == -1) {
-				break; // 종료
-			} else if(bookIndex >=0 && bookIndex < bookdata.size()) {
-				Book selectedBook = bookdata.get(bookIndex);
-				System.out.println("\n=== 도서 정보 ===");
-				System.out.println("제목: " + selectedBook.getTitle());
-				System.out.println("저자: " + selectedBook.getAuthor());
-				System.out.println("출판사: " + selectedBook.getCompany());
-				System.out.println("가격: " + selectedBook.getPrice() +"원");
-				System.out.println("소개: " + selectedBook.getPreview());
-			
-				System.out.println("\n=== 리뷰 ===");
-				List<Review> reviews = Review.getReviewsByBook(bookIndex);
-				for(Review review : reviews) {
-					System.out.println("작성자: " + review.getNick() +"\n별점: " + review.getStarPoint());
-					System.out.println("내용: "+ review.getComment());
-				}
-				
-				System.out.println("\n이 도서를 주문하시겠습니까? (y/n)");
-				String orderChoice = scanner.nextLine();
-				if(orderChoice.equals("y")) {
-					System.out.print("수량: ");
-					int amount = scanner.nextInt();
-					scanner.nextLine();
-					System.out.print("배송지: ");
-					String address = scanner.nextLine();
-					int totalPrice = selectedBook.getPrice() * amount;
-					
-					//주문 저장
-					Order newOrder = new Order(Order.getNextOrderIndex(), selectedBook.getIndex(), this.index, amount,
-							totalPrice, address);
-					Order.addOrder(newOrder);
-					System.out.println("주문이 완료되었습니다.");
-				}else {
-					System.out.println("잘못된 번호입니다.");
-				}
-			}
-			
-		}
+	    Scanner scanner = new Scanner(System.in);
+	    while (true) {
+	    	System.out.println("\n=== 도서 메뉴 ===");
+	        System.out.println("1. 도서 목록 보기");
+	        System.out.println("2. 도서 검색");
+	        System.out.println("3. 종료");
+	        System.out.print("선택: ");
+	        int choice = scanner.nextInt();
+	        scanner.nextLine(); // 개행 문자 소비
+
+	        if (choice == 1) {
+	            // 도서 목록 보기
+	            List<Book> bookdata = Book.getBooks();
+	            System.out.println("\n=== 도서 목록 ===");
+	            for (Book book : bookdata) {
+	                System.out.println(book.getIndex() + ": " + book.getTitle() + " by " + book.getAuthor() + " - " + book.getPrice() + "원");
+	            }
+
+	            System.out.println("도서 상세 보기 또는 주문하려면 도서 번호를 입력하세요. (종료하려면 -1 입력)");
+	            int bookIndex = scanner.nextInt();
+	            scanner.nextLine(); // 개행 문자 소비
+
+	            if (bookIndex == -1) {
+	                continue; // 다시 선택 메뉴로 돌아감
+	            } else if (bookIndex >= 0 && bookIndex < bookdata.size()) {
+	                Book selectedBook = bookdata.get(bookIndex);
+	                System.out.println("\n=== 도서 정보 ===");
+	                System.out.println("제목: " + selectedBook.getTitle());
+	                System.out.println("저자: " + selectedBook.getAuthor());
+	                System.out.println("출판사: " + selectedBook.getCompany());
+	                System.out.println("가격: " + selectedBook.getPrice() + "원");
+	                System.out.println("소개: " + selectedBook.getPreview());
+
+	                System.out.println("\n=== 리뷰 ===");
+	                List<Review> reviews = Review.getReviewsByBook(bookIndex);
+	                for (Review review : reviews) {
+	                    System.out.println("작성자: " + review.getNick() + "\n별점: " + review.getStarPoint());
+	                    System.out.println("내용: " + review.getComment());
+	                }
+
+	                System.out.println("\n이 도서를 주문하시겠습니까? (y/n)");
+	                String orderChoice = scanner.nextLine();
+	                if (orderChoice.equals("y")) {
+	                    System.out.print("수량: ");
+	                    int amount = scanner.nextInt();
+	                    scanner.nextLine(); // 개행 문자 소비
+	                    System.out.print("배송지: ");
+	                    String address = scanner.nextLine();
+	                    int totalPrice = selectedBook.getPrice() * amount;
+
+	                    // 주문 저장
+	                    Order newOrder = new Order(Order.getNextOrderIndex(), selectedBook.getIndex(), this.index, amount,
+	                            totalPrice, address);
+	                    Order.addOrder(newOrder);
+	                    System.out.println("주문이 완료되었습니다.");
+	                } else {
+	                    System.out.println("잘못된 번호입니다.");
+	                }
+	            }
+	        } else if (choice == 2) {
+	            // 도서 검색
+	            searchBooks();
+	        } else if (choice == 3) {
+	            // 종료 선택 시 루프 종료
+	            System.out.println("프로그램을 종료합니다.");
+	            break; // while 루프 종료
+	        } else {
+	            System.out.println("잘못된 선택입니다. 다시 시도하세요.");
+	        }
+	    }
+	}
 		/*
 		 * 도서 목록을 불러와 모든 도서 정보를 나열함 입력을 통해 해당 책의 인덱스 번호를 입력받으면 상세 정보를 출력하고 주문 여부를 물어봄,
 		 * 주문 시 수량과 주소를 입력받아 order 로 보냄 반복해서 구매할 수 있도록 전체 while 문 활용
 		 */
-	}
 	
+	// 사용자 도서 검색 기능
+	public void searchBooks() {
+	    Scanner scanner = new Scanner(System.in);
+	    System.out.print("검색할 키워드를 입력하세요 (제목/저자): ");
+	    String keyword = scanner.nextLine().toLowerCase(); // 소문자로 변환하여 검색 일관성 유지
+
+	    List<Book> bookdata = Book.getBooks(); // 모든 도서를 가져옴
+	    List<Book> searchResults = new ArrayList<>();
+
+	    for (Book book : bookdata) {
+	        if (book.getTitle().toLowerCase().contains(keyword) || book.getAuthor().toLowerCase().contains(keyword)) {
+	            searchResults.add(book); // 제목 또는 저자명에 키워드가 포함된 도서 추가
+	        }
+	    }
+
+	    if (searchResults.isEmpty()) {
+	        System.out.println("검색 결과가 없습니다.");
+	    } else {
+	        System.out.println("\n=== 검색 결과 ===");
+	        for (Book book : searchResults) {
+	            System.out.println(book.getIndex() + ": " + book.getTitle() + " by " + book.getAuthor() + " - " + book.getPrice() + "원");
+	        }
+	    }
+	    System.out.println("\n메인 메뉴로 돌아가려면 Enter를 누르세요");
+	    scanner.nextLine();
+	}
+
 }
